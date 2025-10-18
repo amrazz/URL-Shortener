@@ -1,4 +1,3 @@
-
 # define an alias for the specific python version used in this file.
 FROM vikasy/hirethon-base:latest
 
@@ -22,7 +21,6 @@ COPY --chown=django:django . ${APP_HOME}
 # make django owner of the WORKDIR directory as well.
 RUN chown django:django ${APP_HOME}
 
-# Copy entrypoint and start scripts, make sure they are executable
 # Copy entrypoint and start scripts, make sure they are executable
 COPY --chown=django:django ./compose/local/django/entrypoint /entrypoint
 COPY --chown=django:django ./compose/local/django/start /start
