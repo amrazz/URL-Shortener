@@ -24,3 +24,13 @@ django-cors-headers==4.2.0  # https://github.com/adamchainz/django-cors-headers
 drf-spectacular==0.26.3  # https://github.com/tfranzel/drf-spectacular
 dj-rest-auth==4.0.1
 djangorestframework-simplejwt==5.2.2
+
+
+# TEST
+# ------------------------------------------------------------------------------
+pytest==7.4.0
+pytest-django==4.5.2
+pytest-factoryboy==2.5.0
+factory-boy==3.3.0
+pytest-mock==3.11.1
+pytest-cov==4.1.0

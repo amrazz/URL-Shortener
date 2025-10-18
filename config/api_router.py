@@ -1,15 +1,18 @@
 from django.conf import settings
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter, SimpleRouter
-
-from hirethon_template.users.api.views import UserViewSet
 
 if settings.DEBUG:
     router = DefaultRouter()
 else:
     router = SimpleRouter()
 
-router.register("users", UserViewSet)
 
+# Instead of router.register, use direct URL patterns
+urlpatterns = [
+    path("auth/", include("hirethon_template.users.api.urls")),
+]
 
-app_name = "api"
-urlpatterns = router.urls
+# If you want to keep the router for other apps, you can add them here
+# router.register("some-other-model", SomeOtherViewSet)
+# urlpatterns += router.urls

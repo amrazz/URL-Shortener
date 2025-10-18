@@ -1,31 +1,19 @@
-from collections.abc import Sequence
-from typing import Any
-
+import factory
 from django.contrib.auth import get_user_model
-from factory import Faker, post_generation
-from factory.django import DjangoModelFactory
+
+User = get_user_model()
 
 
-class UserFactory(DjangoModelFactory):
-    email = Faker("email")
-    name = Faker("name")
-
-    @post_generation
-    def password(self, create: bool, extracted: Sequence[Any], **kwargs):
-        password = (
-            extracted
-            if extracted
-            else Faker(
-                "password",
-                length=42,
-                special_chars=True,
-                digits=True,
-                upper_case=True,
-                lower_case=True,
-            ).evaluate(None, None, extra={"locale": None})
-        )
-        self.set_password(password)
-
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = get_user_model()
-        django_get_or_create = ["email"]
+        model = User
+
+    email = factory.Sequence(lambda n: f"user{n}@example.com")
+    name = factory.Faker("name")
+    password = factory.PostGenerationMethodCall("set_password", "testpass123")
+
+    # Remove the _create override since it's causing issues
+    # @classmethod
+    # def _create(cls, model_class, *args, **kwargs):
+    #     manager = cls._get_manager(model_class)
+    #     return manager.create_user(*args, **kwargs)

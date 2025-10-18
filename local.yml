@@ -1,3 +1,4 @@
+---
 version: '3'
 
 volumes:
@@ -26,14 +27,18 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: hirethon_template_production_postgres
-    container_name: hirethon_template_local_postgres
+      dockerfile: ./compose/local/postgres/Dockerfile
+    image: hirethon_template_local_postgres
+    container_name: hirethon_temp late_local_postgres
     volumes:
       - hirethon_template_local_postgres_data:/var/lib/postgresql/data
       - hirethon_template_local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.local/.postgres
+    environment:
+      - POSTGRES_DB=hirethon_template_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=amraz
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:6

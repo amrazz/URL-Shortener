@@ -3,7 +3,7 @@
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
 POSTGRES_DB=hirethon_template_db
-POSTGRES_USER=hirethon_template_user
+POSTGRES_USER=postgres
 POSTGRES_PASSWORD=amraz
 
-DATABASE_URL=postgresql://hirethon_template_user:amraz@postgres:5432/hirethon_template_db
+DATABASE_URL=postgresql://postgres:amraz@hirethon_template_local_postgres:5432/hirethon_template_db
